@@ -449,3 +449,49 @@ generate_plugin_dependencies_index() {
     done
 
 }
+
+########################################
+# PLUGIN FILE INDEX
+########################################
+
+generate_plugin_file_index() {
+
+    local MOODLE_PATH="$1"
+    local OUTPUT="$MOODLE_PATH/MOODLE_PLUGIN_FILE_INDEX.md"
+
+    echo "Gerando MOODLE_PLUGIN_FILE_INDEX.md..."
+
+    cat "$BASE_DIR/templates/MOODLE_PLUGIN_FILE_INDEX.md.tpl" > "$OUTPUT"
+    echo "" >> "$OUTPUT"
+
+    find "$MOODLE_PATH" \
+        -path "*/vendor/*" -prune -o \
+        -name "version.php" -print | while read FILE; do
+
+        PLUGIN_DIR=$(dirname "$FILE")
+        PLUGIN_NAME=$(basename "$PLUGIN_DIR")
+
+        echo "" >> "$OUTPUT"
+        echo "### $PLUGIN_NAME" >> "$OUTPUT"
+        echo "" >> "$OUTPUT"
+
+        echo "**Arquivos principais:**" >> "$OUTPUT"
+
+        for F in version.php lib.php locallib.php settings.php access.php; do
+            if [ -f "$PLUGIN_DIR/$F" ]; then
+                echo "- $F" >> "$OUTPUT"
+            fi
+        done
+
+        echo "" >> "$OUTPUT"
+        echo "**Diretórios:**" >> "$OUTPUT"
+
+        for D in classes db amd templates lang backup pix; do
+            if [ -d "$PLUGIN_DIR/$D" ]; then
+                echo "- $D/" >> "$OUTPUT"
+            fi
+        done
+
+    done
+
+}

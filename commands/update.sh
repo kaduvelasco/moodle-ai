@@ -22,6 +22,7 @@ generate_subsystems_index "$MOODLE_PATH"
 generate_capabilities_index "$MOODLE_PATH"
 generate_database_schema "$MOODLE_PATH"
 generate_plugin_dependencies_index "$MOODLE_PATH"
+generate_plugin_file_index "$MOODLE_PATH"
 
 generate_plugin_map "$MOODLE_PATH"
 

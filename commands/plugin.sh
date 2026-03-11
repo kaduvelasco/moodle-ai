@@ -39,6 +39,14 @@ generate_plugin_events "$MOODLE_PATH" "$PLUGIN_PATH"
 generate_plugin_db_tables "$MOODLE_PATH" "$PLUGIN_PATH"
 generate_plugin_dependencies "$MOODLE_PATH" "$PLUGIN_PATH"
 
+generate_plugin_runtime_flow "$PLUGIN_PATH"
+generate_plugin_function_index "$PLUGIN_PATH"
+generate_plugin_callback_index "$PLUGIN_PATH"
+generate_plugin_endpoint_index "$PLUGIN_PATH"
+
+generate_plugin_architecture "$PLUGIN_PATH"
+generate_plugin_ai_context "$PLUGIN_PATH"
+
 touch "$MOODLE_PATH/$PLUGIN_PATH/.kaduvelasco"
 
 echo "Contexto do plugin gerado."
